@@ -11,6 +11,10 @@ cc_library_shared {
     name: "android.hardware.bluetooth.audio-impl",
     vendor: true,
     vintf_fragments: ["bluetooth_audio.xml"],
+    cflags: select(soong_config_variable("veux", "use_aosp_bluetooth_audio"), {
+        true: ["-DUSE_AOSP_BLUETOOTH_AUDIO_FACTORY"],
+        default: [],
+    }),
     defaults: [
         "aconfig_lib_cc_static_link.defaults",
         "latest_android_hardware_bluetooth_audio_ndk_shared",
